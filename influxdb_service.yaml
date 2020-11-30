@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+spec:
+  ports:
+    - name: 8086-tcp
+      protocol: TCP
+      port: 8086
+      targetPort: 8086
+  selector:
+    deployment: influxdb
+  type: ClusterIP
+  sessionAffinity: None

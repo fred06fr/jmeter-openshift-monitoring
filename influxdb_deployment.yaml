@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: influxdb
+  template:
+    metadata:
+      labels:
+        deployment: influxdb
+    spec:
+      volumes:
+        - name: influxdb-data
+          persistentVolumeClaim:
+            claimName: influxdb-data
+      containers:
+        - name: influxdb
+          image: ${INFLUXDB_IMAGE}
+          ports:
+            - containerPort: 8086
+              protocol: TCP
+          volumeMounts:
+            - name: influxdb-data
+              mountPath: /var/lib/influxdb
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always

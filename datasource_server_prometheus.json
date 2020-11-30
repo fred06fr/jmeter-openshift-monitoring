@@ -1,0 +1,22 @@
+{
+	"name": "Server_Prometheus_${PROMETHEUS_SERVER_SIMPLE_NAME}",
+	"type": "prometheus",
+	"access": "proxy",
+	"url": "${PROMETHEUS_SERVER_URL}",
+	"password": "",
+	"user": "",
+	"database": "",
+	"basicAuth": false,
+	"isDefault": false,
+	"jsonData": {
+		"httpHeaderName1": "Authorization",
+		"oauthPassThru": false,
+		"tlsAuth": false,
+		"tlsAuthWithCACert": false,
+		"tlsSkipVerify": true
+	},
+  "secureJsonData": {
+		"httpHeaderValue1": "Bearer ${PROMETHEUS_SERVER_TOKEN}"
+	},
+	"readOnly": false
+}

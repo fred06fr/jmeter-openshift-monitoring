@@ -1,0 +1,26 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: grafana-config
+data:
+  grafana.ini: |+
+    [auth]
+    disable_signout_menu = true
+
+    [auth.anonymous]
+    enabled = true
+
+    [log]
+    level = warn
+    mode = console
+
+    [paths]
+    data = /var/lib/grafana
+    logs = /var/lib/grafana/logs
+    plugins = /var/lib/grafana/plugins
+    provisioning = /var/lib/grafana/provisioning
+
+    [security]
+    admin_user = admin
+    admin_password = password
+    

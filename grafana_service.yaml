@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: grafana
+spec:
+  ports:
+    - name: grafana
+      protocol: TCP
+      port: 3000
+      targetPort: grafana-http
+  selector:
+    app: grafana
+  type: ClusterIP
+  sessionAffinity: None
