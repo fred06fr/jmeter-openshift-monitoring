@@ -22,7 +22,7 @@
     "gnetId": 549600001,
     "graphTooltip": 0,
     "id": 1,
-    "iteration": 1607072770575,
+    "iteration": 1607082799145,
     "links": [],
     "panels": [
       {
@@ -126,7 +126,7 @@
             ],
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT sum(\"count\")  FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"transaction\" = 'all') AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "query": "SELECT sum(\"count\")  FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND \"transaction\" = 'all') AND $timeFilter GROUP BY time($__interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -246,7 +246,7 @@
             ],
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT sum(\"countError\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "query": "SELECT sum(\"countError\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -366,7 +366,7 @@
             ],
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT sum(\"rb\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/) AND $timeFilter ",
+            "query": "SELECT sum(\"rb\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter ",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -486,7 +486,7 @@
             ],
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT max(\"sb\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "query": "SELECT max(\"sb\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -605,7 +605,7 @@
             ],
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT sum(\"error\") / sum(\"all\") FROM (SELECT sum(\"count\") AS \"all\" FROM \"$jmeter_measurement_name\" WHERE \"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND $timeFilter GROUP BY time($__interval) fill(null)), (SELECT sum(\"countError\") AS \"error\" FROM \"$jmeter_measurement_name\" WHERE \"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND $timeFilter GROUP BY time($__interval) fill(null))",
+            "query": "SELECT sum(\"error\") / sum(\"all\") FROM (SELECT sum(\"count\") AS \"all\" FROM \"$jmeter_measurement_name\" WHERE \"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND $timeFilter GROUP BY time($__interval) fill(null)), (SELECT sum(\"countError\") AS \"error\" FROM \"$jmeter_measurement_name\" WHERE \"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND $timeFilter GROUP BY time($__interval) fill(null))",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -713,7 +713,7 @@
             "measurement": "jmeter",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT mean(\"count\") / $send_interval FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "query": "SELECT mean(\"count\") / $send_interval FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
             "rawQuery": true,
             "refId": "B",
             "resultFormat": "time_series",
@@ -865,7 +865,7 @@
             "measurement": "jmeter",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT sum(\"countError\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "query": "SELECT sum(\"countError\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
             "rawQuery": true,
             "refId": "B",
             "resultFormat": "time_series",
@@ -1014,7 +1014,7 @@
             ],
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT last(\"maxAT\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'internal' AND \"application\" =~ /^$jmeter_application$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "query": "SELECT last(\"maxAT\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'internal' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -1161,8 +1161,8 @@
             "measurement": "jmeter",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT mean(\"pct95.0\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/) AND (\"transaction\" =~ /^[A-Z].*/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
-            "rawQuery": true,
+            "query": "SELECT \"pct95.0\" FROM \"jmeter\" WHERE (\"statut\" = 'ok' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY \"transaction\"",
+            "rawQuery": false,
             "refId": "B",
             "resultFormat": "time_series",
             "select": [
@@ -1186,6 +1186,12 @@
                 "key": "application",
                 "operator": "=~",
                 "value": "/^$jmeter_application$/"
+              },
+              {
+                "condition": "AND",
+                "key": "testId",
+                "operator": "=~",
+                "value": "/^$jmeter_testId$/"
               }
             ]
           },
@@ -1208,7 +1214,7 @@
             "hide": false,
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT last(\"maxAT\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'internal' AND \"application\" =~ /^$jmeter_application$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "query": "SELECT last(\"maxAT\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" = 'internal' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -1272,7 +1278,7 @@
         }
       },
       {
-        "collapsed": true,
+        "collapsed": false,
         "datasource": null,
         "gridPos": {
           "h": 1,
@@ -1281,471 +1287,209 @@
           "y": 22
         },
         "id": 47,
-        "panels": [
-          {
-            "aliasColors": {
-              "banner": "#508642"
-            },
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "$jmeter_data_source",
-            "decimals": 2,
-            "editable": true,
-            "error": false,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {}
-              },
-              "overrides": []
-            },
-            "fill": 1,
-            "fillGradient": 0,
-            "gridPos": {
-              "h": 7,
-              "w": 24,
-              "x": 0,
-              "y": 23
-            },
-            "height": "",
-            "hiddenSeries": false,
-            "id": 36,
-            "interval": "[[send_interval]]s",
-            "legend": {
-              "alignAsTable": true,
-              "avg": true,
-              "current": false,
-              "hideEmpty": false,
-              "hideZero": false,
-              "max": true,
-              "min": false,
-              "rightSide": true,
-              "show": true,
-              "total": false,
-              "values": true
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "options": {
-              "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "7.3.3",
-            "pointradius": 1,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_transaction",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT mean(\"sb\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "sb"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "alias": "$tag_transaction",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT mean(\"rb\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "ok",
-                "fill": true,
-                "line": true,
-                "op": "lt",
-                "value": 500
-              },
-              {
-                "colorMode": "warning",
-                "fill": false,
-                "line": true,
-                "op": "gt",
-                "value": 1500
-              },
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 5000
-              }
-            ],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
-            "title": "Network Traffic",
-            "tooltip": {
-              "msResolution": false,
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "bytes",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": false
-              }
-            ],
-            "yaxis": {
-              "align": false,
-              "alignLevel": null
-            }
-          }
-        ],
+        "panels": [],
         "title": "Network Summary",
         "type": "row"
       },
       {
-        "collapsed": true,
-        "datasource": null,
+        "aliasColors": {
+          "banner": "#508642"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$jmeter_data_source",
+        "decimals": 2,
+        "editable": true,
+        "error": false,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
         "gridPos": {
-          "h": 1,
+          "h": 7,
           "w": 24,
           "x": 0,
           "y": 23
         },
-        "id": 43,
-        "panels": [
+        "height": "",
+        "hiddenSeries": false,
+        "id": 36,
+        "interval": "[[send_interval]]s",
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": false,
+          "hideEmpty": false,
+          "hideZero": false,
+          "max": true,
+          "min": false,
+          "rightSide": true,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.3.3",
+        "pointradius": 1,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
           {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "$server_data_source",
-            "decimals": 1,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {},
-                "links": []
-              },
-              "overrides": []
-            },
-            "fill": 10,
-            "fillGradient": 0,
-            "gridPos": {
-              "h": 7,
-              "w": 24,
-              "x": 0,
-              "y": 24
-            },
-            "hiddenSeries": false,
-            "id": 1,
-            "legend": {
-              "alignAsTable": true,
-              "avg": true,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": true,
-              "show": true,
-              "sideWidth": 400,
-              "total": false,
-              "values": true
-            },
-            "lines": true,
-            "linewidth": 0,
-            "links": [],
-            "nullPointMode": "null as zero",
-            "options": {
-              "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "7.3.3",
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [
+            "alias": "$tag_transaction",
+            "groupBy": [
               {
-                "alias": "quota - requests",
-                "color": "#F2495C",
-                "dashes": true,
-                "fill": 0,
-                "hideTooltip": true,
-                "legend": false,
-                "linewidth": 2,
-                "stack": false
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
               },
               {
-                "alias": "quota - limits",
-                "color": "#FF9830",
-                "dashes": true,
-                "fill": 0,
-                "hideTooltip": true,
-                "legend": false,
-                "linewidth": 2,
-                "stack": false
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
               }
             ],
-            "spaceLength": 10,
-            "stack": true,
-            "steppedLine": false,
-            "targets": [
-              {
-                "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$server_cluster\", namespace=\"$server_namespace\"}* on(namespace,pod)  group_left(workload, workload_type) mixin_pod_workload{cluster=\"$server_cluster\", namespace=\"$server_namespace\", workload_type=\"$server_workload_type\"}) by (workload, workload_type)",
-                "instant": false,
-                "interval": "",
-                "legendFormat": "{{workload}} - {{workload_type}}",
-                "refId": "A"
-              }
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT mean(\"sb\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "sb"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
             ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
-            "title": "Server Workload CPU Usage",
-            "tooltip": {
-              "shared": false,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": 0,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": false
-              }
-            ],
-            "yaxis": {
-              "align": false,
-              "alignLevel": null
-            }
+            "tags": []
           },
           {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "$server_data_source",
-            "decimals": 1,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {},
-                "links": []
-              },
-              "overrides": []
-            },
-            "fill": 10,
-            "fillGradient": 0,
-            "gridPos": {
-              "h": 7,
-              "w": 24,
-              "x": 0,
-              "y": 31
-            },
-            "hiddenSeries": false,
-            "id": 41,
-            "legend": {
-              "alignAsTable": true,
-              "avg": true,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": true,
-              "show": true,
-              "sideWidth": 400,
-              "total": false,
-              "values": true
-            },
-            "lines": true,
-            "linewidth": 0,
-            "links": [],
-            "nullPointMode": "null as zero",
-            "options": {
-              "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "7.3.3",
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [
+            "alias": "$tag_transaction",
+            "groupBy": [
               {
-                "alias": "quota - requests",
-                "color": "#F2495C",
-                "dashes": true,
-                "fill": 0,
-                "hideTooltip": true,
-                "legend": false,
-                "linewidth": 2,
-                "stack": false
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
               },
               {
-                "alias": "quota - limits",
-                "color": "#FF9830",
-                "dashes": true,
-                "fill": 0,
-                "hideTooltip": true,
-                "legend": false,
-                "linewidth": 2,
-                "stack": false
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
               }
             ],
-            "spaceLength": 10,
-            "stack": true,
-            "steppedLine": false,
-            "targets": [
-              {
-                "expr": "sum(container_memory_working_set_bytes{cluster=\"$server_cluster\", namespace=\"$server_namespace\", container!=\"\"}* on(namespace,pod)   group_left(workload, workload_type) mixin_pod_workload{cluster=\"$server_cluster\", namespace=\"$server_namespace\", workload_type=\"$server_workload_type\"}) by (workload, workload_type)",
-                "instant": false,
-                "interval": "",
-                "legendFormat": "{{workload}} - {{workload_type}}",
-                "refId": "A"
-              }
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT mean(\"rb\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "B",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
             ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
-            "title": "Server Workload Memory Usage",
-            "tooltip": {
-              "shared": false,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": 0,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": false
-              }
-            ],
-            "yaxis": {
-              "align": false,
-              "alignLevel": null
-            }
+            "tags": []
           }
         ],
-        "title": "Openshift4 Server Performance",
-        "type": "row"
+        "thresholds": [
+          {
+            "colorMode": "ok",
+            "fill": true,
+            "line": true,
+            "op": "lt",
+            "value": 500
+          },
+          {
+            "colorMode": "warning",
+            "fill": false,
+            "line": true,
+            "op": "gt",
+            "value": 1500
+          },
+          {
+            "colorMode": "critical",
+            "fill": true,
+            "line": true,
+            "op": "gt",
+            "value": 5000
+          }
+        ],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Network Traffic",
+        "tooltip": {
+          "msResolution": false,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "bytes",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
       },
       {
         "collapsed": false,
@@ -1754,11 +1498,11 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 24
+          "y": 30
         },
-        "id": 45,
+        "id": 43,
         "panels": [],
-        "title": "Openshift3 Server Performance",
+        "title": "Openshift4 Server Performance",
         "type": "row"
       },
       {
@@ -1781,10 +1525,10 @@
           "h": 7,
           "w": 24,
           "x": 0,
-          "y": 25
+          "y": 31
         },
         "hiddenSeries": false,
-        "id": 39,
+        "id": 1,
         "legend": {
           "alignAsTable": true,
           "avg": true,
@@ -1836,10 +1580,10 @@
         "steppedLine": false,
         "targets": [
           {
-            "expr": "sum(namespace_pod_name_container_name:container_cpu_usage_seconds_total:sum_rate{namespace=\"$server_namespace\"}) by (pod_name)",
+            "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$server_cluster\", namespace=\"$server_namespace\"}* on(namespace,pod)  group_left(workload, workload_type) mixin_pod_workload{cluster=\"$server_cluster\", namespace=\"$server_namespace\", workload_type=\"$server_workload_type\"}) by (workload, workload_type)",
             "instant": false,
             "interval": "",
-            "legendFormat": "{{pod_name}}",
+            "legendFormat": "{{workload}} - {{workload_type}}",
             "refId": "A"
           }
         ],
@@ -1847,7 +1591,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Server Pods CPU Usage",
+        "title": "Server Workload CPU Usage",
         "tooltip": {
           "shared": false,
           "sort": 0,
@@ -1904,10 +1648,10 @@
           "h": 7,
           "w": 24,
           "x": 0,
-          "y": 32
+          "y": 38
         },
         "hiddenSeries": false,
-        "id": 40,
+        "id": 41,
         "legend": {
           "alignAsTable": true,
           "avg": true,
@@ -1959,10 +1703,10 @@
         "steppedLine": false,
         "targets": [
           {
-            "expr": "sum(container_memory_usage_bytes{namespace=\"$server_namespace\", container_name!=\"\"}) by (pod_name)",
+            "expr": "sum(container_memory_working_set_bytes{cluster=\"$server_cluster\", namespace=\"$server_namespace\", container!=\"\"}* on(namespace,pod)   group_left(workload, workload_type) mixin_pod_workload{cluster=\"$server_cluster\", namespace=\"$server_namespace\", workload_type=\"$server_workload_type\"}) by (workload, workload_type)",
             "instant": false,
             "interval": "",
-            "legendFormat": "{{pod_name}}",
+            "legendFormat": "{{workload}} - {{workload_type}}",
             "refId": "A"
           }
         ],
@@ -1970,7 +1714,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Server Pods Memory Usage",
+        "title": "Server Workload Memory Usage",
         "tooltip": {
           "shared": false,
           "sort": 0,
@@ -2014,7 +1758,268 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 39
+          "y": 45
+        },
+        "id": 45,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "$server_data_source",
+            "decimals": 1,
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 10,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 46
+            },
+            "hiddenSeries": false,
+            "id": 39,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": true,
+              "show": true,
+              "sideWidth": 400,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 0,
+            "links": [],
+            "nullPointMode": "null as zero",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.3.3",
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "quota - requests",
+                "color": "#F2495C",
+                "dashes": true,
+                "fill": 0,
+                "hideTooltip": true,
+                "legend": false,
+                "linewidth": 2,
+                "stack": false
+              },
+              {
+                "alias": "quota - limits",
+                "color": "#FF9830",
+                "dashes": true,
+                "fill": 0,
+                "hideTooltip": true,
+                "legend": false,
+                "linewidth": 2,
+                "stack": false
+              }
+            ],
+            "spaceLength": 10,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(namespace_pod_name_container_name:container_cpu_usage_seconds_total:sum_rate{namespace=\"$server_namespace\"}) by (pod_name)",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "{{pod_name}}",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Server Pods CPU Usage",
+            "tooltip": {
+              "shared": false,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": false
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "$server_data_source",
+            "decimals": 1,
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 10,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 53
+            },
+            "hiddenSeries": false,
+            "id": 40,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": true,
+              "show": true,
+              "sideWidth": 400,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 0,
+            "links": [],
+            "nullPointMode": "null as zero",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.3.3",
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "quota - requests",
+                "color": "#F2495C",
+                "dashes": true,
+                "fill": 0,
+                "hideTooltip": true,
+                "legend": false,
+                "linewidth": 2,
+                "stack": false
+              },
+              {
+                "alias": "quota - limits",
+                "color": "#FF9830",
+                "dashes": true,
+                "fill": 0,
+                "hideTooltip": true,
+                "legend": false,
+                "linewidth": 2,
+                "stack": false
+              }
+            ],
+            "spaceLength": 10,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(container_memory_usage_bytes{namespace=\"$server_namespace\", container_name!=\"\"}) by (pod_name)",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "{{pod_name}}",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Server Pods Memory Usage",
+            "tooltip": {
+              "shared": false,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": false
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          }
+        ],
+        "title": "Openshift3 Server Performance",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 46
         },
         "id": 34,
         "panels": [
@@ -2084,7 +2089,7 @@
                 "measurement": "jmeter",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"statut\" = 'ko') AND $timeFilter GROUP BY \"transaction\"",
+                "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND \"statut\" = 'ko') AND $timeFilter GROUP BY \"transaction\"",
                 "rawQuery": true,
                 "refId": "A",
                 "resultFormat": "table",
@@ -2186,7 +2191,7 @@
                 "measurement": "jmeter",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"responseCode\" !~ /^$/) AND $timeFilter GROUP BY \"responseCode\",\"responseMessage\"",
+                "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND \"responseCode\" !~ /^$/) AND $timeFilter GROUP BY \"responseCode\",\"responseMessage\"",
                 "rawQuery": true,
                 "refId": "A",
                 "resultFormat": "table",
@@ -2233,1159 +2238,1158 @@
         "type": "row"
       },
       {
-        "collapsed": true,
+        "collapsed": false,
         "datasource": null,
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 40
+          "y": 47
         },
         "id": 35,
-        "panels": [
-          {
-            "cacheTimeout": null,
-            "colorBackground": false,
-            "colorValue": true,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "#e5ac0e",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "datasource": "$jmeter_data_source",
-            "decimals": 0,
-            "editable": true,
-            "error": false,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {}
-              },
-              "overrides": []
-            },
-            "format": "none",
-            "gauge": {
-              "maxValue": 100,
-              "minValue": 0,
-              "show": false,
-              "thresholdLabels": false,
-              "thresholdMarkers": true
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 8,
-              "x": 0,
-              "y": 48
-            },
-            "id": 9,
-            "interval": "[[send_interval]]s",
-            "links": [],
-            "mappingType": 1,
-            "mappingTypes": [
-              {
-                "name": "value to text",
-                "value": 1
-              },
-              {
-                "name": "range to text",
-                "value": 2
-              }
-            ],
-            "maxDataPoints": 100,
-            "nullPointMode": "connected",
-            "nullText": null,
-            "postfix": " Requests",
-            "postfixFontSize": "50%",
-            "prefix": "",
-            "prefixFontSize": "50%",
-            "rangeMaps": [
-              {
-                "from": "null",
-                "text": "N/A",
-                "to": "null"
-              }
-            ],
-            "sparkline": {
-              "fillColor": "rgba(31, 118, 189, 0.18)",
-              "full": false,
-              "lineColor": "#e5ac0e",
-              "show": false
-            },
-            "tableColumn": "",
-            "targets": [
-              {
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'all') AND $timeFilter GROUP BY time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "count"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "sum"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$jmeter_transaction_details$/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "statut",
-                    "operator": "=",
-                    "value": "all"
-                  }
-                ]
-              }
-            ],
-            "thresholds": "",
-            "title": "Total Requests - $jmeter_transaction_details",
-            "type": "singlestat",
-            "valueFontSize": "80%",
-            "valueMaps": [
-              {
-                "op": "=",
-                "text": "0",
-                "value": "null"
-              }
-            ],
-            "valueName": "total"
-          },
-          {
-            "cacheTimeout": null,
-            "colorBackground": false,
-            "colorValue": true,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "#e24d42",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "datasource": "$jmeter_data_source",
-            "decimals": 0,
-            "editable": true,
-            "error": false,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {}
-              },
-              "overrides": []
-            },
-            "format": "none",
-            "gauge": {
-              "maxValue": 100,
-              "minValue": 0,
-              "show": false,
-              "thresholdLabels": false,
-              "thresholdMarkers": true
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 8,
-              "x": 8,
-              "y": 48
-            },
-            "id": 6,
-            "interval": "[[send_interval]]s",
-            "links": [],
-            "mappingType": 1,
-            "mappingTypes": [
-              {
-                "name": "value to text",
-                "value": 1
-              },
-              {
-                "name": "range to text",
-                "value": 2
-              }
-            ],
-            "maxDataPoints": 100,
-            "nullPointMode": "connected",
-            "nullText": null,
-            "postfix": " Failed",
-            "postfixFontSize": "50%",
-            "prefix": "",
-            "prefixFontSize": "50%",
-            "rangeMaps": [
-              {
-                "from": "null",
-                "text": "N/A",
-                "to": "null"
-              }
-            ],
-            "sparkline": {
-              "fillColor": "rgba(31, 118, 189, 0.18)",
-              "full": false,
-              "lineColor": "#e24d42",
-              "show": false
-            },
-            "tableColumn": "",
-            "targets": [
-              {
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ko') AND $timeFilter GROUP BY time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "count"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "sum"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$jmeter_transaction_details$/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "statut",
-                    "operator": "=",
-                    "value": "ko"
-                  }
-                ]
-              }
-            ],
-            "thresholds": "",
-            "title": "Failed Requests - $jmeter_transaction_details",
-            "type": "singlestat",
-            "valueFontSize": "80%",
-            "valueMaps": [
-              {
-                "op": "=",
-                "text": "0",
-                "value": "null"
-              }
-            ],
-            "valueName": "total"
-          },
-          {
-            "cacheTimeout": null,
-            "colorBackground": false,
-            "colorValue": true,
-            "colors": [
-              "rgba(50, 172, 45, 0.97)",
-              "#e5ac0e",
-              "#e24d42"
-            ],
-            "datasource": "$jmeter_data_source",
-            "decimals": 2,
-            "editable": true,
-            "error": false,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {}
-              },
-              "overrides": []
-            },
-            "format": "percentunit",
-            "gauge": {
-              "maxValue": 1,
-              "minValue": 0,
-              "show": true,
-              "thresholdLabels": false,
-              "thresholdMarkers": true
-            },
-            "gridPos": {
-              "h": 7,
-              "w": 8,
-              "x": 16,
-              "y": 48
-            },
-            "id": 8,
-            "interval": "[[send_interval]]s",
-            "links": [],
-            "mappingType": 1,
-            "mappingTypes": [
-              {
-                "name": "value to text",
-                "value": 1
-              },
-              {
-                "name": "range to text",
-                "value": 2
-              }
-            ],
-            "maxDataPoints": 100,
-            "nullPointMode": "connected",
-            "nullText": null,
-            "postfix": "",
-            "postfixFontSize": "50%",
-            "prefix": "",
-            "prefixFontSize": "50%",
-            "rangeMaps": [
-              {
-                "from": "null",
-                "text": "N/A",
-                "to": "null"
-              }
-            ],
-            "sparkline": {
-              "fillColor": "rgba(31, 118, 189, 0.18)",
-              "full": false,
-              "lineColor": "rgb(14, 237, 45)",
-              "show": false
-            },
-            "tableColumn": "",
-            "targets": [
-              {
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT sum(\"error\") / sum(\"all\") FROM (SELECT sum(\"count\") AS \"all\" FROM \"$jmeter_measurement_name\" WHERE \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND $timeFilter GROUP BY time($__interval) fill(null)), (SELECT sum(\"count\") AS \"error\" FROM \"$jmeter_measurement_name\" WHERE \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ko' AND \"application\" =~ /^$jmeter_application$/ AND $timeFilter GROUP BY time($__interval) fill(null))",
-                "rawQuery": true,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "count"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "sum"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$jmeter_transaction_details$/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "statut",
-                    "operator": "=",
-                    "value": "ok"
-                  }
-                ]
-              }
-            ],
-            "thresholds": "0,0.01",
-            "title": "Error Rate % - $jmeter_transaction_details",
-            "type": "singlestat",
-            "valueFontSize": "50%",
-            "valueMaps": [
-              {
-                "op": "=",
-                "text": "0",
-                "value": "null"
-              }
-            ],
-            "valueName": "total"
-          },
-          {
-            "aliasColors": {
-              "90th Percentage": "#EAB839",
-              "95th Percentage": "#EF843C",
-              "99th Percentage": "#99440A",
-              "Average": "#3F6833",
-              "Max": "#58140C",
-              "Req / s": "#6ed0e0"
-            },
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "$jmeter_data_source",
-            "decimals": 2,
-            "editable": true,
-            "error": false,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {}
-              },
-              "overrides": []
-            },
-            "fill": 7,
-            "fillGradient": 0,
-            "gridPos": {
-              "h": 7,
-              "w": 12,
-              "x": 0,
-              "y": 55
-            },
-            "height": "",
-            "hiddenSeries": false,
-            "id": 10,
-            "interval": "[[send_interval]]s",
-            "legend": {
-              "alignAsTable": true,
-              "avg": true,
-              "current": false,
-              "max": true,
-              "min": true,
-              "rightSide": false,
-              "show": true,
-              "total": false,
-              "values": true
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "options": {
-              "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "7.3.3",
-            "pointradius": 1,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [
-              {
-                "alias": "Average",
-                "yaxis": 1
-              }
-            ],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Req / s",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  }
-                ],
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT last(\"count\") / $send_interval FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
-                "rawQuery": true,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "count"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "sum"
-                    },
-                    {
-                      "params": [
-                        "5s"
-                      ],
-                      "type": "non_negative_derivative"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$jmeter_transaction_details$/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "statut",
-                    "operator": "=",
-                    "value": "ok"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
-            "title": "Throughput - $jmeter_transaction_details",
-            "tooltip": {
-              "msResolution": false,
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": false
-              }
-            ],
-            "yaxis": {
-              "align": false,
-              "alignLevel": null
-            }
-          },
-          {
-            "aliasColors": {
-              "Num of Errors": "#bf1b00",
-              "num of errors": "#bf1b00"
-            },
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "$jmeter_data_source",
-            "decimals": 0,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {}
-              },
-              "overrides": []
-            },
-            "fill": 7,
-            "fillGradient": 0,
-            "gridPos": {
-              "h": 7,
-              "w": 12,
-              "x": 12,
-              "y": 55
-            },
-            "hiddenSeries": false,
-            "id": 32,
-            "interval": "[[send_interval]]s",
-            "legend": {
-              "alignAsTable": true,
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": false,
-              "show": true,
-              "total": true,
-              "values": true
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "options": {
-              "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "7.3.3",
-            "pointradius": 1,
-            "points": true,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Num of Errors",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE \"application\" =~ /^$jmeter_application$/ AND \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ko' AND $timeFilter GROUP BY time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
-            "title": "Errors",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": 1,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "decimals": 0,
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ],
-            "yaxis": {
-              "align": false,
-              "alignLevel": null
-            }
-          },
-          {
-            "aliasColors": {
-              "90th Percentage": "#f2c96d",
-              "95th Percentage": "#EF843C",
-              "99th Percentage": "#bf1b00",
-              "Average": "#7eb26d",
-              "Max": "#584477",
-              "Median": "#6ed0e0",
-              "median": "#6ed0e0"
-            },
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "$jmeter_data_source",
-            "decimals": 2,
-            "editable": true,
-            "error": false,
-            "fieldConfig": {
-              "defaults": {
-                "custom": {}
-              },
-              "overrides": []
-            },
-            "fill": 1,
-            "fillGradient": 0,
-            "gridPos": {
-              "h": 7,
-              "w": 24,
-              "x": 0,
-              "y": 62
-            },
-            "height": "",
-            "hiddenSeries": false,
-            "id": 5,
-            "interval": "[[send_interval]]s",
-            "legend": {
-              "alignAsTable": true,
-              "avg": true,
-              "current": false,
-              "hideEmpty": true,
-              "max": true,
-              "min": false,
-              "rightSide": true,
-              "show": true,
-              "sortDesc": true,
-              "total": false,
-              "values": true
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "options": {
-              "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "7.3.3",
-            "pointradius": 1,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [
-              {
-                "alias": "Average",
-                "yaxis": 1
-              }
-            ],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Average",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$aggregation"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT last(\"avg\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
-                "rawQuery": true,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "avg"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$request$/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "statut",
-                    "operator": "=",
-                    "value": "ok"
-                  }
-                ]
-              },
-              {
-                "alias": "Median",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$aggregation"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "hide": false,
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT last(\"pct50.0\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
-                "rawQuery": true,
-                "refId": "F",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "pct50.0"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$request$/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "statut",
-                    "operator": "=",
-                    "value": "all"
-                  }
-                ]
-              },
-              {
-                "alias": "90th Percentile",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$aggregation"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT last(\"pct90.0\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "pct90.0"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$request$/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "statut",
-                    "operator": "=",
-                    "value": "all"
-                  }
-                ]
-              },
-              {
-                "alias": "95th Percentile",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$aggregation"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "hide": false,
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT last(\"pct95.0\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "C",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "pct95.0"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$request$/"
-                  }
-                ]
-              },
-              {
-                "alias": "99th Percentile",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$aggregation"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "hide": false,
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT last(\"pct99.0\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "D",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "pct99.0"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$request$/"
-                  }
-                ]
-              },
-              {
-                "alias": "Max",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$aggregation"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "jmeter",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT last(\"max\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval) fill(null)",
-                "rawQuery": true,
-                "refId": "E",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "max"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "transaction",
-                    "operator": "=~",
-                    "value": "/^$request$/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "statut",
-                    "operator": "=",
-                    "value": "ok"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "ok",
-                "fill": true,
-                "line": true,
-                "op": "lt",
-                "value": 500
-              },
-              {
-                "colorMode": "warning",
-                "fill": false,
-                "line": true,
-                "op": "gt",
-                "value": 1500
-              },
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 5000
-              }
-            ],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
-            "title": "Response Times - $jmeter_transaction_details",
-            "tooltip": {
-              "msResolution": false,
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "ms",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": false
-              }
-            ],
-            "yaxis": {
-              "align": false,
-              "alignLevel": null
-            }
-          }
-        ],
+        "panels": [],
         "repeat": null,
         "title": "Individual Transaction - $jmeter_transaction_details",
         "type": "row"
+      },
+      {
+        "cacheTimeout": null,
+        "colorBackground": false,
+        "colorValue": true,
+        "colors": [
+          "rgba(245, 54, 54, 0.9)",
+          "#e5ac0e",
+          "rgba(50, 172, 45, 0.97)"
+        ],
+        "datasource": "$jmeter_data_source",
+        "decimals": 0,
+        "editable": true,
+        "error": false,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "format": "none",
+        "gauge": {
+          "maxValue": 100,
+          "minValue": 0,
+          "show": false,
+          "thresholdLabels": false,
+          "thresholdMarkers": true
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 48
+        },
+        "id": 9,
+        "interval": "[[send_interval]]s",
+        "links": [],
+        "mappingType": 1,
+        "mappingTypes": [
+          {
+            "name": "value to text",
+            "value": 1
+          },
+          {
+            "name": "range to text",
+            "value": 2
+          }
+        ],
+        "maxDataPoints": 100,
+        "nullPointMode": "connected",
+        "nullText": null,
+        "postfix": " Requests",
+        "postfixFontSize": "50%",
+        "prefix": "",
+        "prefixFontSize": "50%",
+        "rangeMaps": [
+          {
+            "from": "null",
+            "text": "N/A",
+            "to": "null"
+          }
+        ],
+        "sparkline": {
+          "fillColor": "rgba(31, 118, 189, 0.18)",
+          "full": false,
+          "lineColor": "#e5ac0e",
+          "show": false
+        },
+        "tableColumn": "",
+        "targets": [
+          {
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'all') AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "count"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "sum"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$jmeter_transaction_details$/"
+              },
+              {
+                "condition": "AND",
+                "key": "statut",
+                "operator": "=",
+                "value": "all"
+              }
+            ]
+          }
+        ],
+        "thresholds": "",
+        "title": "Total Requests - $jmeter_transaction_details",
+        "type": "singlestat",
+        "valueFontSize": "80%",
+        "valueMaps": [
+          {
+            "op": "=",
+            "text": "0",
+            "value": "null"
+          }
+        ],
+        "valueName": "total"
+      },
+      {
+        "cacheTimeout": null,
+        "colorBackground": false,
+        "colorValue": true,
+        "colors": [
+          "rgba(245, 54, 54, 0.9)",
+          "#e24d42",
+          "rgba(50, 172, 45, 0.97)"
+        ],
+        "datasource": "$jmeter_data_source",
+        "decimals": 0,
+        "editable": true,
+        "error": false,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "format": "none",
+        "gauge": {
+          "maxValue": 100,
+          "minValue": 0,
+          "show": false,
+          "thresholdLabels": false,
+          "thresholdMarkers": true
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 48
+        },
+        "id": 6,
+        "interval": "[[send_interval]]s",
+        "links": [],
+        "mappingType": 1,
+        "mappingTypes": [
+          {
+            "name": "value to text",
+            "value": 1
+          },
+          {
+            "name": "range to text",
+            "value": 2
+          }
+        ],
+        "maxDataPoints": 100,
+        "nullPointMode": "connected",
+        "nullText": null,
+        "postfix": " Failed",
+        "postfixFontSize": "50%",
+        "prefix": "",
+        "prefixFontSize": "50%",
+        "rangeMaps": [
+          {
+            "from": "null",
+            "text": "N/A",
+            "to": "null"
+          }
+        ],
+        "sparkline": {
+          "fillColor": "rgba(31, 118, 189, 0.18)",
+          "full": false,
+          "lineColor": "#e24d42",
+          "show": false
+        },
+        "tableColumn": "",
+        "targets": [
+          {
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE (\"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ko') AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "count"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "sum"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$jmeter_transaction_details$/"
+              },
+              {
+                "condition": "AND",
+                "key": "statut",
+                "operator": "=",
+                "value": "ko"
+              }
+            ]
+          }
+        ],
+        "thresholds": "",
+        "title": "Failed Requests - $jmeter_transaction_details",
+        "type": "singlestat",
+        "valueFontSize": "80%",
+        "valueMaps": [
+          {
+            "op": "=",
+            "text": "0",
+            "value": "null"
+          }
+        ],
+        "valueName": "total"
+      },
+      {
+        "cacheTimeout": null,
+        "colorBackground": false,
+        "colorValue": true,
+        "colors": [
+          "rgba(50, 172, 45, 0.97)",
+          "#e5ac0e",
+          "#e24d42"
+        ],
+        "datasource": "$jmeter_data_source",
+        "decimals": 2,
+        "editable": true,
+        "error": false,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "format": "percentunit",
+        "gauge": {
+          "maxValue": 1,
+          "minValue": 0,
+          "show": true,
+          "thresholdLabels": false,
+          "thresholdMarkers": true
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 48
+        },
+        "id": 8,
+        "interval": "[[send_interval]]s",
+        "links": [],
+        "mappingType": 1,
+        "mappingTypes": [
+          {
+            "name": "value to text",
+            "value": 1
+          },
+          {
+            "name": "range to text",
+            "value": 2
+          }
+        ],
+        "maxDataPoints": 100,
+        "nullPointMode": "connected",
+        "nullText": null,
+        "postfix": "",
+        "postfixFontSize": "50%",
+        "prefix": "",
+        "prefixFontSize": "50%",
+        "rangeMaps": [
+          {
+            "from": "null",
+            "text": "N/A",
+            "to": "null"
+          }
+        ],
+        "sparkline": {
+          "fillColor": "rgba(31, 118, 189, 0.18)",
+          "full": false,
+          "lineColor": "rgb(14, 237, 45)",
+          "show": false
+        },
+        "tableColumn": "",
+        "targets": [
+          {
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT sum(\"error\") / sum(\"all\") FROM (SELECT sum(\"count\") AS \"all\" FROM \"$jmeter_measurement_name\" WHERE \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'all' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND $timeFilter GROUP BY time($__interval) fill(null)), (SELECT sum(\"count\") AS \"error\" FROM \"$jmeter_measurement_name\" WHERE \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ko' AND \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND $timeFilter GROUP BY time($__interval) fill(null))",
+            "rawQuery": true,
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "count"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "sum"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$jmeter_transaction_details$/"
+              },
+              {
+                "condition": "AND",
+                "key": "statut",
+                "operator": "=",
+                "value": "ok"
+              }
+            ]
+          }
+        ],
+        "thresholds": "0,0.01",
+        "title": "Error Rate % - $jmeter_transaction_details",
+        "type": "singlestat",
+        "valueFontSize": "50%",
+        "valueMaps": [
+          {
+            "op": "=",
+            "text": "0",
+            "value": "null"
+          }
+        ],
+        "valueName": "total"
+      },
+      {
+        "aliasColors": {
+          "90th Percentage": "#EAB839",
+          "95th Percentage": "#EF843C",
+          "99th Percentage": "#99440A",
+          "Average": "#3F6833",
+          "Max": "#58140C",
+          "Req / s": "#6ed0e0"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$jmeter_data_source",
+        "decimals": 2,
+        "editable": true,
+        "error": false,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 7,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 55
+        },
+        "height": "",
+        "hiddenSeries": false,
+        "id": 10,
+        "interval": "[[send_interval]]s",
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": false,
+          "max": true,
+          "min": true,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.3.3",
+        "pointradius": 1,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "alias": "Average",
+            "yaxis": 1
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "Req / s",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              }
+            ],
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT last(\"count\") / $send_interval FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
+            "rawQuery": true,
+            "refId": "B",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "count"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "sum"
+                },
+                {
+                  "params": [
+                    "5s"
+                  ],
+                  "type": "non_negative_derivative"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$jmeter_transaction_details$/"
+              },
+              {
+                "condition": "AND",
+                "key": "statut",
+                "operator": "=",
+                "value": "ok"
+              }
+            ]
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Throughput - $jmeter_transaction_details",
+        "tooltip": {
+          "msResolution": false,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {
+          "Num of Errors": "#bf1b00",
+          "num of errors": "#bf1b00"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$jmeter_data_source",
+        "decimals": 0,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 7,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 55
+        },
+        "hiddenSeries": false,
+        "id": 32,
+        "interval": "[[send_interval]]s",
+        "legend": {
+          "alignAsTable": true,
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": true,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.3.3",
+        "pointradius": 1,
+        "points": true,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "Num of Errors",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT sum(\"count\") FROM \"$jmeter_measurement_name\" WHERE \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND \"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ko' AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Errors",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": 1,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "decimals": 0,
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {
+          "90th Percentage": "#f2c96d",
+          "95th Percentage": "#EF843C",
+          "99th Percentage": "#bf1b00",
+          "Average": "#7eb26d",
+          "Max": "#584477",
+          "Median": "#6ed0e0",
+          "median": "#6ed0e0"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$jmeter_data_source",
+        "decimals": 2,
+        "editable": true,
+        "error": false,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 62
+        },
+        "height": "",
+        "hiddenSeries": false,
+        "id": 5,
+        "interval": "[[send_interval]]s",
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": false,
+          "hideEmpty": true,
+          "max": true,
+          "min": false,
+          "rightSide": true,
+          "show": true,
+          "sortDesc": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.3.3",
+        "pointradius": 1,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "alias": "Average",
+            "yaxis": 1
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "Average",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$aggregation"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT last(\"avg\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
+            "rawQuery": true,
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "avg"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "last"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$request$/"
+              },
+              {
+                "condition": "AND",
+                "key": "statut",
+                "operator": "=",
+                "value": "ok"
+              }
+            ]
+          },
+          {
+            "alias": "Median",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$aggregation"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "hide": false,
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT last(\"pct50.0\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
+            "rawQuery": true,
+            "refId": "F",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "pct50.0"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "last"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$request$/"
+              },
+              {
+                "condition": "AND",
+                "key": "statut",
+                "operator": "=",
+                "value": "all"
+              }
+            ]
+          },
+          {
+            "alias": "90th Percentile",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$aggregation"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT last(\"pct90.0\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "B",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "pct90.0"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "last"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$request$/"
+              },
+              {
+                "condition": "AND",
+                "key": "statut",
+                "operator": "=",
+                "value": "all"
+              }
+            ]
+          },
+          {
+            "alias": "95th Percentile",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$aggregation"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "hide": false,
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT last(\"pct95.0\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "C",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "pct95.0"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "last"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$request$/"
+              }
+            ]
+          },
+          {
+            "alias": "99th Percentile",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$aggregation"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "hide": false,
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT last(\"pct99.0\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "D",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "pct99.0"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "last"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$request$/"
+              }
+            ]
+          },
+          {
+            "alias": "Max",
+            "dsType": "influxdb",
+            "groupBy": [
+              {
+                "params": [
+                  "$aggregation"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "jmeter",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT last(\"max\") FROM \"$jmeter_measurement_name\" WHERE (\"transaction\" =~ /^$jmeter_transaction_details$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "refId": "E",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "max"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "last"
+                }
+              ]
+            ],
+            "tags": [
+              {
+                "key": "transaction",
+                "operator": "=~",
+                "value": "/^$request$/"
+              },
+              {
+                "condition": "AND",
+                "key": "statut",
+                "operator": "=",
+                "value": "ok"
+              }
+            ]
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "ok",
+            "fill": true,
+            "line": true,
+            "op": "lt",
+            "value": 500
+          },
+          {
+            "colorMode": "warning",
+            "fill": false,
+            "line": true,
+            "op": "gt",
+            "value": 1500
+          },
+          {
+            "colorMode": "critical",
+            "fill": true,
+            "line": true,
+            "op": "gt",
+            "value": 5000
+          }
+        ],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Response Times - $jmeter_transaction_details",
+        "tooltip": {
+          "msResolution": false,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "ms",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
       }
     ],
     "refresh": "1m",
@@ -3447,6 +3451,33 @@
           "allValue": null,
           "current": {
             "selected": false,
+            "text": "dods_test",
+            "value": "dods_test"
+          },
+          "datasource": "$jmeter_data_source",
+          "definition": "",
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": "",
+          "multi": false,
+          "name": "jmeter_testId",
+          "options": [],
+          "query": "SHOW TAG VALUES FROM \"jmeter\" WITH KEY = \"testId\"",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": null,
+          "tags": [],
+          "tagsQuery": null,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
             "text": "getSolution1Data",
             "value": "getSolution1Data"
           },
@@ -3459,7 +3490,7 @@
           "multi": false,
           "name": "jmeter_transaction_details",
           "options": [],
-          "query": "SHOW TAG VALUES FROM \"jmeter\" WITH KEY = \"transaction\" WHERE \"application\" =~ /^$jmeter_application$/ AND \"transaction\" != 'internal' AND \"transaction\" != 'all'",
+          "query": "SHOW TAG VALUES FROM \"jmeter\" WITH KEY = \"transaction\" WHERE \"application\" =~ /^$jmeter_application$/ AND \"testId\" =~ /^$jmeter_testId$/ AND \"transaction\" != 'internal' AND \"transaction\" != 'all'",
           "refresh": 1,
           "regex": "",
           "skipUrlSync": false,
@@ -3511,8 +3542,8 @@
         {
           "current": {
             "selected": true,
-            "text": "Server_Prometheus_cp4dperf8",
-            "value": "Server_Prometheus_cp4dperf8"
+            "text": "Server_Prometheus_do-oc4-nfs-7",
+            "value": "Server_Prometheus_do-oc4-nfs-7"
           },
           "error": null,
           "hide": 0,
@@ -3560,8 +3591,8 @@
           "allValue": null,
           "current": {
             "selected": true,
-            "text": "zen",
-            "value": "zen"
+            "text": "cp4d-dev-fred",
+            "value": "cp4d-dev-fred"
           },
           "datasource": "$server_data_source",
           "definition": "label_values(kube_pod_info{cluster=\"$server_cluster\"}, namespace)",
@@ -3586,10 +3617,9 @@
         {
           "allValue": null,
           "current": {
-            "isNone": true,
             "selected": false,
-            "text": "None",
-            "value": ""
+            "text": "deployment",
+            "value": "deployment"
           },
           "datasource": "$server_data_source",
           "definition": "label_values(mixin_pod_workload{namespace=~\"$server_namespace\", workload=~\".+\"}, workload_type)",
@@ -3614,7 +3644,7 @@
       ]
     },
     "time": {
-      "from": "now-15m",
+      "from": "now-1h",
       "to": "now"
     },
     "timepicker": {
@@ -3644,7 +3674,7 @@
     "timezone": "browser",
     "title": "JMeter+Openshift Dashboard",
     "uid": "whatever_uid",
-    "version": 4
+    "version": 6
   }
 ,
   "overwrite": false
