@@ -76,11 +76,11 @@ if ! oc project ${NAMESPACE} 2>/dev/null; then
   oc new-project ${NAMESPACE} 
 fi
 
-#createInfluxDB
-#createGrafana
-#createJMeterDatabaseInInfluxDB
-#createJMeterDatasourceInGrafana
-#createServerDatasourceInGrafana
+createInfluxDB
+createGrafana
+createJMeterDatabaseInInfluxDB
+createJMeterDatasourceInGrafana
+createServerDatasourceInGrafana
 createDashboardInGrafana
 
 
