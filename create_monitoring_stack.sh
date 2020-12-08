@@ -56,6 +56,7 @@ function createDashboardInGrafana {
   echo "Create/Update dashboard"
   GRAFANA_ROUTE=$(oc get route grafana -o jsonpath='{.spec.host}')
   cat "$SCRIPT_DIR/dashboard_client_and_server_jmeter.json" | jq '. * {overwrite: true, dashboard: {id: null}}' | curl "http://admin:password@$GRAFANA_ROUTE/api/dashboards/db" -X POST -H 'Content-Type: application/json;charset=UTF-8' --data-binary @-
+  cat "$SCRIPT_DIR/dashboard_comparison_jmeter.json" | jq '. * {overwrite: true, dashboard: {id: null}}' | curl "http://admin:password@$GRAFANA_ROUTE/api/dashboards/db" -X POST -H 'Content-Type: application/json;charset=UTF-8' --data-binary @-
   echo
 }
 
@@ -75,11 +76,11 @@ if ! oc project ${NAMESPACE} 2>/dev/null; then
   oc new-project ${NAMESPACE} 
 fi
 
-createInfluxDB
-createGrafana
-createJMeterDatabaseInInfluxDB
-createJMeterDatasourceInGrafana
-createServerDatasourceInGrafana
+#createInfluxDB
+#createGrafana
+#createJMeterDatabaseInInfluxDB
+#createJMeterDatasourceInGrafana
+#createServerDatasourceInGrafana
 createDashboardInGrafana
 
 
