@@ -1,6 +1,6 @@
 # Performance tests: simultaneous "live" reporting of client response time and server load with JMeter and Openshift
 
-This project setups a monitoring stack in Openshift, that will allow to monitor simultaneously in real time:
+This project setups a monitoring stack in Openshift, that allows to monitor simultaneously in real time:
 - JMeter test results: this is the performance as seen from client side
 - Your server workload running on Openshift: this is the load as seen from server side
 
@@ -12,7 +12,7 @@ https://medium.com/@fpesquet/performance-tests-simultaneous-live-reporting-of-cl
 ## Architecture
 
 Our architecture is quite simple:
-- JMeter exercise the server application, and reports performance results (response times, errors, etc.) in an InfluxDB database
+- JMeter exercises the server application, and reports performance results (response times, errors, etc.) in an InfluxDB database
 - RedHat Openshift reports performance measurements of your server workload (cpu, memory, network usage) in its Prometheus instance
 - Grafana displays a live report with both client-side measurements and related server-side measurements
 
@@ -68,7 +68,7 @@ _Background articles and documents for reference:_
 _Background articles and documents for reference:_
 - https://jmeter.apache.org/usermanual/realtime-results.html
 
-## Login in Grafana and see results
+## Log in to Grafana and see results
 
 - connect to grafana with a browser using the monitoring stack grafana server that you got in the output log of 'Create monitoring stack in Openshift', for example: `http://grafana-jmeter-monitoring.apps.my-server.com`
 - login with 'admin/password' to be admin
