@@ -22,7 +22,7 @@
     "gnetId": 549600001,
     "graphTooltip": 0,
     "id": 1,
-    "iteration": 1607596076167,
+    "iteration": 1659615861610,
     "links": [],
     "panels": [
       {
@@ -1961,7 +1961,7 @@
         "steppedLine": false,
         "targets": [
           {
-            "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$server_cluster\", namespace=\"$server_namespace\"}* on(namespace,pod)  group_left(workload) mixin_pod_workload{cluster=\"$server_cluster\", namespace=\"$server_namespace\"}) by (workload)",
+            "expr": "sum(\n    node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$server_cluster\", namespace=\"$server_namespace\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$server_cluster\", namespace=\"$server_namespace\", workload_type=\"deployment\"}\n) by (workload)",
             "instant": false,
             "interval": "",
             "legendFormat": "{{workload}}",
@@ -2086,7 +2086,7 @@
         "steppedLine": false,
         "targets": [
           {
-            "expr": "sum(container_memory_working_set_bytes{cluster=\"$server_cluster\", namespace=\"$server_namespace\", container!=\"\"}* on(namespace,pod)  group_left(workload) mixin_pod_workload{cluster=\"$server_cluster\", namespace=\"$server_namespace\"}) by (workload)",
+            "expr": "sum(container_memory_working_set_bytes{cluster=\"$server_cluster\", namespace=\"$server_namespace\", container!=\"\"}* on(namespace,pod)  group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$server_cluster\", namespace=\"$server_namespace\"}) by (workload)",
             "instant": false,
             "interval": "",
             "legendFormat": "{{workload}}",
@@ -2113,7 +2113,7 @@
         },
         "yaxes": [
           {
-            "format": "short",
+            "format": "bytes",
             "label": null,
             "logBase": 1,
             "max": null,
@@ -3834,8 +3834,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "dods_do-oc4-nfs-1_ref_3",
-            "value": "dods_do-oc4-nfs-1_ref_3"
+            "text": "test_id",
+            "value": "test_id"
           },
           "datasource": "$jmeter_data_source",
           "definition": "",
@@ -3860,8 +3860,8 @@
         {
           "current": {
             "selected": true,
-            "text": "[A-Z]+.*",
-            "value": "[A-Z]+.*"
+            "text": "[A-Z].*",
+            "value": "[A-Z].*"
           },
           "error": null,
           "hide": 0,
@@ -3870,11 +3870,11 @@
           "options": [
             {
               "selected": true,
-              "text": "[A-Z]+.*",
-              "value": "[A-Z]+.*"
+              "text": "[A-Z].*",
+              "value": "[A-Z].*"
             }
           ],
-          "query": "[A-Z]+.*",
+          "query": "[A-Z].*",
           "skipUrlSync": false,
           "type": "textbox"
         },
@@ -3949,9 +3949,9 @@
         },
         {
           "current": {
-            "selected": true,
-            "text": "Server_Prometheus_do-oc4-nfs-1",
-            "value": "Server_Prometheus_do-oc4-nfs-1"
+            "selected": false,
+            "text": "prometheus_server_name",
+            "value": "prometheus_server_name"
           },
           "error": null,
           "hide": 0,
@@ -3970,7 +3970,6 @@
         {
           "allValue": null,
           "current": {
-            "isNone": true,
             "selected": false,
             "text": "None",
             "value": ""
@@ -3999,8 +3998,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "cp4d-30-1",
-            "value": "cp4d-30-1"
+            "text": "cluster_namespace",
+            "value": "cluster_namespace"
           },
           "datasource": "$server_data_source",
           "definition": "label_values(kube_pod_info{cluster=\"$server_cluster\"}, namespace)",
@@ -4055,7 +4054,7 @@
     "timezone": "browser",
     "title": "JMeter+Openshift Dashboard",
     "uid": "whatever_uid",
-    "version": 18
+    "version": 4
   }
 ,
   "overwrite": false
