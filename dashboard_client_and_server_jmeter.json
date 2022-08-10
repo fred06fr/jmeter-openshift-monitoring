@@ -2212,7 +2212,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max(\n  rate(container_cpu_usage_seconds_total{namespace=\"cpd-perf\", pod=~\"$static_pods_regexp\"}[5m])\n    / on (container, pod)\n  kube_pod_container_resource_limits{resource=\"cpu\"}\n) by (pod)\n",
+          "expr": "max(\n  rate(container_cpu_usage_seconds_total{namespace=\"cpd-perf\", pod=~\"$static_pods_regexp\"}[5m])\n    / on (container, pod) group_left\n  kube_pod_container_resource_limits{resource=\"cpu\"}\n) by (pod)\n",
           "instant": false,
           "interval": "",
           "legendFormat": "{{workload}}",
@@ -2338,7 +2338,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max(\n  container_memory_working_set_bytes{namespace=\"cpd-perf\", pod=~\"$static_pods_regexp\"}\n    / on (container, pod)\n  kube_pod_container_resource_limits{resource=\"memory\"}\n) by (pod)",
+          "expr": "max(\n  container_memory_working_set_bytes{namespace=\"cpd-perf\", pod=~\"$static_pods_regexp\"}\n    / on (container, pod) group_left\n  kube_pod_container_resource_limits{resource=\"memory\"}\n) by (pod)",
           "instant": false,
           "interval": "",
           "legendFormat": "{{pod}}",
