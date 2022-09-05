@@ -4,7 +4,7 @@ set -e
 
 : ${NAMESPACE:=jmeter-monitoring}
 : ${INFLUXDB_IMAGE:=quay.io/influxdb/influxdb:1.6.4}
-: ${GRAFANA_IMAGE:=quay.io/app-sre/grafana:7.3.3}
+: ${GRAFANA_IMAGE:=grafana/grafana:7.3.3}
 : ${K8S_STORAGE_CLASS:=nfs-client}
 
 function createInfluxDB {
