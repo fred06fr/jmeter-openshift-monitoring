@@ -15,7 +15,12 @@ PROMETHEUS_SERVER=${PROMETHEUS_SERVER/api./} # OC4
 PROMETHEUS_SERVER_SIMPLE_NAME=${PROMETHEUS_SERVER/.*/}
 echo "Create Server datasource for the current server '$PROMETHEUS_SERVER' in grafana instance running in '$GRAFANA_ROUTE'"
 PROMETHEUS_SERVER_URL="https://prometheus-k8s-openshift-monitoring.apps.$PROMETHEUS_SERVER"
-PROMETHEUS_SERVER_TOKEN=$(oc sa get-token prometheus-k8s -n openshift-monitoring)
+echo "Get token to access prometheus (may fail, expected)"
+PROMETHEUS_SERVER_TOKEN=$(oc serviceaccounts get-token prometheus-k8s -n openshift-monitoring || true)
+if [[ ("$PROMETHEUS_SERVER_TOKEN" == "") ]]; then
+    echo "No token available, create token with label 'usage=jmeter-openshift-monitoring' for prometheus-sa service account"
+    PROMETHEUS_SERVER_TOKEN=$(oc serviceaccounts new-token prometheus-k8s -n openshift-monitoring --labels usage=jmeter-openshift-monitoring)
+fi
 if [[ ("$PROMETHEUS_SERVER_TOKEN" == "") || ("$PROMETHEUS_SERVER" == "") ]]; then
     echo "Something is wrong, I have: PROMETHEUS_SERVER='$PROMETHEUS_SERVER' ; PROMETHEUS_SERVER_TOKEN='$PROMETHEUS_SERVER_TOKEN' which does not seem right. Sorry :-("
     exit -1
